@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 export default class Welcome extends React.Component{
 render(){
     return(
-        <>
+        <div class="space">
 
 <Card style={{ width: '18rem' }} className="cardsPof">
       <Card.Img variant="top" src="https://media.istockphoto.com/photos/books-picture-id949118068?k=20&m=949118068&s=612x612&w=0&h=e8tiaCdluEA9IS_I7ytStcx--toLbovf3U74v-LfNAk="  alt="image book"/>
@@ -17,7 +17,7 @@ render(){
         <Login />
       </Card.Body>
     </Card>
-        </>
+     </div>
     )
 }
 

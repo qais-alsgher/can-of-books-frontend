@@ -15,7 +15,7 @@ class BestBooks extends React.Component {
     /* TODO: render all the books in a Carousel */
 
     return (
-      <>
+      <div class="space">
         <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
 
         {this.state.books.length ? (
@@ -23,7 +23,7 @@ class BestBooks extends React.Component {
         ) : (
           <h3>No Books Found :(</h3>
         )}
-      </>
+      </div>
     )
   }
 }

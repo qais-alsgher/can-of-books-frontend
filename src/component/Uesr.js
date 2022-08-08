@@ -11,7 +11,7 @@ const Profile = () => {
 
   return (
     isAuthenticated && (
-      <div>
+      <div class="space">
 <Card style={{ width: '18rem' }} className="cardsPof">
       <Card.Img variant="top" src={user.picture} alt={user.name}/>
       <Card.Body>

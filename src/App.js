@@ -27,6 +27,11 @@ function App(){
             >
             </Route>
             <Route 
+              exact path="/"
+              element={isAuthenticated? <BestBooks />:<Welcome />}
+            >
+            </Route>
+            <Route 
               exact path="/about"
               element={<User />}
             >
