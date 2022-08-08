@@ -3,31 +3,42 @@ import Header from './Header';
 import Footer from './Footer';
 import BestBooks from './BestBooks';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import User from './component/Uesr'
+import './App.css';
+import { useAuth0 } from '@auth0/auth0-react'
+import Welcome from './component/Welcome';
 import {
   BrowserRouter as Router,
   Routes,
   Route
 } from "react-router-dom";
 
-class App extends React.Component {
-  render() {
+function App(){
+  console.log()
+  const{isAuthenticated} = useAuth0();
     return (
       <>
         <Router>
           <Header />
           <Routes>
             <Route 
-              exact path="/"
-              element={<BestBooks />}
+              exact path="/home"
+              element={isAuthenticated? <BestBooks />:<Welcome />}
             >
             </Route>
-            {/* PLACEHOLDER: add a route with a path of '/about' that renders the `About` component */}
+            <Route 
+              exact path="/about"
+              element={<User />}
+            >
+            </Route>
+  
           </Routes>
           <Footer />
         </Router>
       </>
     )
-  }
 }
 
 export default App;
+
+
