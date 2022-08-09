@@ -1,29 +1,57 @@
 import React from 'react';
-
+import axios from 'axios';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import PrintBook from './component/PrintBook';
+import EmptyBook from './component/EmptyBook';
 class BestBooks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      books: []
+      books: [],
+      showEnpty:false
     }
   }
 
-  /* TODO: Make a GET request to your API to fetch all the books from the database  */
+  getBook=async()=>{
+    const allBook= await axios.get('http://localhost:3000/books')
+    if(allBook.data.length===0){
+      this.setState({
+        showEnpty:true
+      })
+    }else{
+    this.setState({
+      books:allBook.data
+    })
+    }
+    console.log(allBook.data);
+  }
+
+  componentDidMount() {
+    this.getBook();
+  }
+
 
   render() {
-
-    /* TODO: render all the books in a Carousel */
-
+    
     return (
-      <div class="space">
-        <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
+      <>
+  {this.state.showEnpty?(<EmptyBook />):
 
-        {this.state.books.length ? (
-          <p>Book Carousel coming soon</p>
-        ) : (
-          <h3>No Books Found :(</h3>
-        )}
-      </div>
+      (<Row xs={1} md={3} className="g-4">
+      {
+        this.state.books.map(ele=>{
+          return(
+          <>
+          <Col>
+          <PrintBook book={ele}/>
+          </Col>
+          </>
+          )
+        })
+      }
+      </Row>)};
+      </>
     )
   }
 }
