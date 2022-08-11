@@ -17,7 +17,7 @@ export default class UpdatBook extends React.Component{
             description:e.target.desBook.value,
             status:e.target.statusBook.value
           }
-          await axios.put(`https://deploy-preview-4--snazzy-muffin-82cc1f.netlify.app/${this.props.id}`,{dataUpdat});
+          await axios.put(`http://localhost:3000/books/${this.props.id}`,{dataUpdat});
           this.getBook();
     }
 

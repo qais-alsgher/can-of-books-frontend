@@ -14,7 +14,7 @@ class BestBooks extends React.Component {
   }
 
   getBook=async()=>{
-    const allBook= await axios.get('https://deploy-preview-4--snazzy-muffin-82cc1f.netlify.app/books')
+    const allBook= await axios.get('http://localhost:3000/books')
     if(allBook.data.length===0){
       this.setState({
         showEnpty:true
@@ -33,7 +33,7 @@ class BestBooks extends React.Component {
 // delet book
   handleDelete=async(id)=>{
 
-await axios.delete(`https://deploy-preview-4--snazzy-muffin-82cc1f.netlify.app/${id}`);
+await axios.delete(`http://localhost:3000/books/${id}`);
 this.getBook();
 }
 
@@ -49,7 +49,7 @@ console.log("error the data input is empty");
     description:e.target.desBook.value,
     status:e.target.statusBook.value
   }
-await axios.post(`https://deploy-preview-4--snazzy-muffin-82cc1f.netlify.app/books`,{newBook})
+await axios.post(`http://localhost:3000/books`,{newBook})
 this.getBook();
 }}
 
