@@ -30,6 +30,28 @@ class BestBooks extends React.Component {
   componentDidMount() {
     this.getBook();
   }
+// delet book
+  handleDelete=async(id)=>{
+
+await axios.delete(`http://localhost:3000/books/${id}`);
+this.getBook();
+}
+
+//add new book
+handleCreatBook=async(e)=>{
+  e.preventDefault();
+  console.log(e.target.titleBok.value);
+if(e.target.titleBok.value==="" ||  e.target.desBook.value===""){
+console.log("error the data input is empty");
+}else{
+  const newBook={
+    title:e.target.titleBok.value,
+    description:e.target.desBook.value,
+    status:e.target.statusBook.value
+  }
+await axios.post(`http://localhost:3000/books`,{newBook})
+this.getBook();
+}}
 
 
   render() {
@@ -44,7 +66,7 @@ class BestBooks extends React.Component {
           return(
           <>
           <Col>
-          <PrintBook book={ele}/>
+          <PrintBook book={ele} handleDelete={this.handleDelete} handleCreatBook={this.handleCreatBook} getBook={this.getBook}/>
           </Col>
           </>
           )
