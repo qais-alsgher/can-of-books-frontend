@@ -9,20 +9,20 @@ class BestBooks extends React.Component {
     super(props);
     this.state = {
       books: [],
-      showEnpty:false
+      showEnpty: false
     }
   }
 
-  getBook=async()=>{
-    const allBook= await axios.get('http://localhost:3000/books')
-    if(allBook.data.length===0){
+  getBook = async () => {
+    const allBook = await axios.get('https://books-store-code.herokuapp.com/books')
+    if (allBook.data.length === 0) {
       this.setState({
-        showEnpty:true
+        showEnpty: true
       })
-    }else{
-    this.setState({
-      books:allBook.data
-    })
+    } else {
+      this.setState({
+        books: allBook.data
+      })
     }
     console.log(allBook.data);
   }
@@ -30,49 +30,50 @@ class BestBooks extends React.Component {
   componentDidMount() {
     this.getBook();
   }
-// delet book
-  handleDelete=async(id)=>{
+  // delet book
+  handleDelete = async (id) => {
 
-await axios.delete(`http://localhost:3000/books/${id}`);
-this.getBook();
-}
-
-//add new book
-handleCreatBook=async(e)=>{
-  e.preventDefault();
-  console.log(e.target.titleBok.value);
-if(e.target.titleBok.value==="" ||  e.target.desBook.value===""){
-console.log("error the data input is empty");
-}else{
-  const newBook={
-    title:e.target.titleBok.value,
-    description:e.target.desBook.value,
-    status:e.target.statusBook.value
+    await axios.delete(`https://books-store-code.herokuapp.com/books/${id}`);
+    this.getBook();
   }
-await axios.post(`http://localhost:3000/books`,{newBook})
-this.getBook();
-}}
+
+  //add new book
+  handleCreatBook = async (e) => {
+    e.preventDefault();
+    console.log(e.target.titleBok.value);
+    if (e.target.titleBok.value === "" || e.target.desBook.value === "") {
+      console.log("error the data input is empty");
+    } else {
+      const newBook = {
+        title: e.target.titleBok.value,
+        description: e.target.desBook.value,
+        status: e.target.statusBook.value
+      }
+      await axios.post(`https://books-store-code.herokuapp.com/books`, { newBook })
+      this.getBook();
+    }
+  }
 
 
   render() {
-    
+
     return (
       <>
-  {this.state.showEnpty?(<EmptyBook />):
+        {this.state.showEnpty ? (<EmptyBook />) :
 
-      (<Row xs={1} md={3} className="g-4">
-      {
-        this.state.books.map(ele=>{
-          return(
-          <>
-          <Col>
-          <PrintBook book={ele} handleDelete={this.handleDelete} handleCreatBook={this.handleCreatBook} getBook={this.getBook}/>
-          </Col>
-          </>
-          )
-        })
-      }
-      </Row>)};
+          (<Row xs={1} md={3} className="g-4">
+            {
+              this.state.books.map(ele => {
+                return (
+                  <>
+                    <Col>
+                      <PrintBook book={ele} handleDelete={this.handleDelete} handleCreatBook={this.handleCreatBook} getBook={this.getBook} />
+                    </Col>
+                  </>
+                )
+              })
+            }
+          </Row>)};
       </>
     )
   }

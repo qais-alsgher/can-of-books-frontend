@@ -12,15 +12,15 @@ const Profile = () => {
   return (
     isAuthenticated && (
       <div class="space">
-<Card style={{ width: '18rem' }} className="cardsPof">
-      <Card.Img variant="top" src={user.picture} alt={user.name}/>
-      <Card.Body>
-        <Card.Title>{user.name}</Card.Title>
-        <Card.Text>
-        {user.email}
-        </Card.Text>
-      </Card.Body>
-    </Card>
+        <Card style={{ width: '18rem' }} className="cardsPof">
+          <Card.Img variant="top" src={user.picture} alt={user.name} />
+          <Card.Body>
+            <Card.Title>{user.name}</Card.Title>
+            <Card.Text>
+              {user.email}
+            </Card.Text>
+          </Card.Body>
+        </Card>
       </div>
     )
   );
